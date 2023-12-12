@@ -1,6 +1,7 @@
 from django.db import models
 from core.models import TimestampZone
 
+
 class Post(TimestampZone):
     title = models.CharField(max_length=100)
     content = models.TextField()
