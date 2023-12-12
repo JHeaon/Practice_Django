@@ -1,10 +1,16 @@
+"""
+장고 개발순서는 개발자마다 다르겠지만, ERD 도식을 보면서 개발하는 경우가 많기 때문에
+MVT 패턴을 순서대로 개발하는 것을 추천한다.
+"""
+
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 SECRET_KEY = "django-insecure-2*1ffkuyg%_4zg3meo@df9n6n(a$b1gl4g!-f^q@j%(r=d1b(#"
+
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -77,19 +83,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
-
+# TIME_ZONE = Aisa/Seoul로 변경할 경우 USE_TZ = False로 하는 것을 추천한다.
+TIME_ZONE = "Asia/Seoul"
+USE_TZ = False
 USE_I18N = True
 
-USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
 STATIC_URL = "static/"
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
