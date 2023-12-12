@@ -22,6 +22,8 @@ INSTALLED_APPS = [
     # Custom apps
     "api",
     "core",
+    # Third party apps
+    "django_seed",
 ]
 
 
