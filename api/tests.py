@@ -5,7 +5,6 @@ from .models import *
 
 
 class APITestCase(TestCase):
-
     # setUpTestData() 는 클래스 전체에서 사용되는 설정을 위해서 테스트 시작 때 딱 한 번만 실행된다.
     # 테스트 메소드가 실행되면서 수정되거나 변경되지 않을 객체들을 이곳에서 생성할 수 있습니다.
     @classmethod

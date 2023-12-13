@@ -1,12 +1,14 @@
 from django.contrib import admin
 from .models import Post, Comment
 
+
 # inline객체를 통해서 한 화면에 여러 객체를 보여줄 수 있도록 설정함
 # StackedInline: 스택형식으로 보여줌
 # TabularInline: 테이블 형식으로 보여줌
 class CommentInline(admin.TabularInline):
     model = Comment
     extra = 1
+
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
@@ -27,6 +29,7 @@ class PostAdmin(admin.ModelAdmin):
     #     ("기본 정보", {"fields": ("title", "content")}),
     #     ("추가 정보", {"fields": ()}),
     # )
+
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
