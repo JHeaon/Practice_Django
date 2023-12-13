@@ -80,6 +80,92 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# LOGGING 설정
+# version : logging 모듈이 업그레이드 되어도, 현재 설정을 보장할수있도록 1을 권장하고 있다.
+# disable_existing_loggers: 이전 로거들을 비활성화 하지 않고, 기본 로깅 구성을 유지하고 확장한다는 의미를 가지고 있다.
+# filters : 특정조건에서 로그를 출력하거나, 출력하지 않게 하기 위해서 사용한다.
+# formatters : 포맷터에 로그를 출력할 형식을 설정한다.
+
+# handler : 로그를 출력할 방법에 대해서 정의한다.
+# console: 콘솔에 로그 출력
+# django.server: 개발 서버에서만 콘솔로 로그 출력
+# mail_admins: 로그 레벨이 error이상이고, DEBUG=False일때 로그를 이메일로 전송, 환경설정에 ADMINS = ["j3heawon@naver.com"]과 이메일 발송을 위한 SMTP처리 또한 필요하다.
+
+# logger: 로거를 정의한다.
+# django: INFO 이상 레벨의 로그 메세지를 console 및 mail_admins 핸들러에 보낸다.
+# django.server: INFO 이상 레벨의 로그 메세지를 django.server 핸들러로 보낸다. 해당 로거는 개발용 웹 서버인 runserver에서 사용하는 로거이다. 5xx응답은 ERROR, 4xx응답은 WARNING, 그 외는 INFO메세지로 출력한다.
+
+
+
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    'formatters': {
+        'django.server': {
+            '()': 'django.utils.log.ServerFormatter',
+            'format': '[{server_time}] {message}',
+            'style': '{',
+        },
+
+        # 해당 내용은 커스텀한 내용입니다.
+        'verbose': {
+            'format': '[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s',
+            'datefmt': '%Y-%m-%d %H:%M:%S',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+        },
+        'django.server': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'django.server',
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        },
+
+        # 해당 내용은 커스텀한 내용입니다.
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'logs' / 'debug.log',
+            'formatter': 'verbose',
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'mail_admins'],
+            'level': 'INFO',
+        },
+        'django.server': {
+            'handlers': ['django.server'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+
+        # 해당 내용은 커스텀한 내용입니다.
+        'api': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+        },
+    }
+}
 
 LANGUAGE_CODE = "en-us"
 
