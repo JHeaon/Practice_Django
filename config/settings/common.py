@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     # Custom apps
     "api",
     "core",
+    "blog",
     # Third party apps
     "django_seed",
 ]
@@ -61,7 +62,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "NAME": BASE_DIR / "db" / "db.sqlite3",
     }
 }
 
@@ -175,4 +176,5 @@ USE_TZ = False
 USE_I18N = True
 
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
