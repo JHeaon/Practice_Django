@@ -6,13 +6,16 @@ from .models import *
 # StackedInline: 스택형식으로 보여줌
 # TabularInline: 테이블 형식으로 보여줌
 
+
 class PublisherInline(admin.TabularInline):
     model = Publisher
     extra = 1
 
+
 class AuthorInline(admin.TabularInline):
     model = Author
     extra = 1
+
 
 class BookInline(admin.TabularInline):
     model = Book
@@ -43,6 +46,7 @@ class BookAdmin(admin.ModelAdmin):
 class PublisherAdmin(admin.ModelAdmin):
     inlines = [BookInline]
     list_display = ("name", "address", "website")
+
 
 @admin.register(Author)
 class AuthorAdmin(admin.ModelAdmin):
