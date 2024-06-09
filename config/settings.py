@@ -22,6 +22,15 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 ]
 
+CUSTOM_APPS = []
+
+
+THIRD_APPS = [
+    "rest_framework",
+]
+
+INSTALLED_APPS += THIRD_APPS + CUSTOM_APPS
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
